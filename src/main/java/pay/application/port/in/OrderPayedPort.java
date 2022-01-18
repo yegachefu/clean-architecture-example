@@ -1,4 +1,4 @@
-package order.application.port.in;
+package pay.application.port.in;
 
 public interface OrderPayedPort {
     void payOrder(Long orderId);

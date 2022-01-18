@@ -29,11 +29,11 @@ public class FoodApplication implements CommandLineRunner {
                             new CartOptionGroup("기본",
                                     new CartOption("소(250g)", Money.wons(12000)))));
 
-        orderService.placeOrder(cart);
+        orderService.placeOrder(cart); //주문
 
-        orderService.payOrder(1L);
+        orderService.payOrder(1L); //결제
 
-        orderService.deliverOrder(1L);
+        orderService.deliverOrder(1L); //배송
     }
 
     public static void main(String[] args) {

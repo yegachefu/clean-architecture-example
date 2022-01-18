@@ -3,7 +3,6 @@ package org.eternity.food.domain.order;
 import lombok.Builder;
 import lombok.Getter;
 import org.eternity.food.domain.generic.money.Money;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -9,3 +9,5 @@
 - 내용 질문은 이슈로 등록하고, 당일 스터디 리더가 얘기할 것 준비하기
 - 샘플 코드는 [우아한 객체지향 Ch2](https://github.com/eternity-oop/Woowahan-OO-02-domain-service) 을 베이스로 아키텍쳐 잡아보기 
 
+### 고민점
+1. mapper 의 위치

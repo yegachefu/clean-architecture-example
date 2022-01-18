@@ -1,10 +1,14 @@
 package order.application.port.in;
 
 import order.domain.Order;
-import org.eternity.food.domain.order.OrderLineItem;
-import org.eternity.food.domain.order.OrderOptionGroup;
-import org.eternity.food.domain.shop.*;
+import order.domain.OrderLineItem;
+import order.domain.OrderOptionGroup;
 import org.springframework.stereotype.Component;
+import shop.adapter.out.persistence.MenuRepository;
+import shop.adapter.out.persistence.ShopRepository;
+import shop.domain.Menu;
+import shop.domain.OptionGroupSpecification;
+import shop.domain.Shop;
 
 import java.util.Map;
 
