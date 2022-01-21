@@ -1,9 +1,11 @@
-package order.adapter.in.web;
+package order.application.port.in;
 
 import order.adapter.in.web.model.CartRequest;
 import order.adapter.in.web.model.OrderResponse;
-import order.application.port.in.model.OrderRequest;
-import order.domain.*;
+import order.domain.Order;
+import order.domain.OrderLineItem;
+import order.domain.OrderOption;
+import order.domain.OrderOptionGroup;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -12,13 +14,6 @@ import static java.util.stream.Collectors.toList;
 
 @Component
 public class OrderMapper {
-
-    public Order mapOrderRequestFrom(OrderRequest request) {
-        return new Order(
-                request.getUserId(),
-                request.getShopId(),
-                request.getOrderLineItems());
-    }
 
     public Order mapFrom(CartRequest cart) {
         return new Order(

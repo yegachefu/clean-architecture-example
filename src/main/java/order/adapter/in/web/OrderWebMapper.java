@@ -3,31 +3,37 @@ package order.adapter.in.web;
 import order.adapter.in.web.model.CartRequest;
 import order.adapter.in.web.model.OrderResponse;
 import order.application.port.in.model.OrderRequest;
-import order.domain.*;
+import order.domain.Order;
+import order.domain.OrderLineItem;
+import order.domain.OrderOption;
+import order.domain.OrderOptionGroup;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 @Component
-public class OrderMapper {
+public class OrderWebMapper {
 
-    public Order mapOrderRequestFrom(OrderRequest request) {
-        return new Order(
-                request.getUserId(),
-                request.getShopId(),
-                request.getOrderLineItems());
-    }
-
-    public Order mapFrom(CartRequest cart) {
-        return new Order(
+    public OrderRequest mapOrderRequestFrom(CartRequest cart) {
+        return new OrderRequest(
                 cart.getUserId(),
                 cart.getShopId(),
                 cart.getCartLineItems()
                         .stream()
                         .map(this::toOrderLineItem)
-                        .collect(toList()));
+                        .collect(toList()),
+                LocalDateTime.now(), null);
+    }
+
+    public OrderResponse mapOrderResponseFrom(Order order) {
+        return new OrderResponse(
+                order.getShopId(),
+                order.getOrderLineItems(),
+                order.getOrderedTime()
+        );
     }
 
     private OrderLineItem toOrderLineItem(CartRequest.CartLineItem cartLineItem) {

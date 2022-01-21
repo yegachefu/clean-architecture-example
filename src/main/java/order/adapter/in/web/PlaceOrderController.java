@@ -1,8 +1,11 @@
 package order.adapter.in.web;
 
 import lombok.RequiredArgsConstructor;
-import order.application.port.in.OrderPort;
-import order.domain.Cart;
+import order.adapter.in.web.model.CartRequest;
+import order.adapter.in.web.model.OrderResponse;
+import order.application.port.in.OrderUsecase;
+import order.application.port.in.model.OrderRequest;
+import order.domain.Order;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,14 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PlaceOrderController {
 
-    private final OrderPort orderPort;
-    //주문
+    private final OrderUsecase orderUsecase;
+    private OrderWebMapper orderRequestMapper;
+
     @PostMapping("place")
-    public void placeOrder(
-            @RequestBody Cart cart
-    ) { //request용 도메인?
+    public OrderResponse placeOrder(
+            @RequestBody CartRequest cart
+    ) {
         //validate
-        orderPort.placeOrder(cart);
-        //orderPayedPort 로 command 유효성 검증한 후 호출
+        //양방향 매핑
+        OrderRequest orderRequest = orderRequestMapper.mapOrderRequestFrom(cart);
+        Order createdOrder = orderUsecase.placeOrder(orderRequest);
+        return orderRequestMapper.mapOrderResponseFrom(createdOrder);
     }
 }

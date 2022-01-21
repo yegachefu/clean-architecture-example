@@ -1,40 +1,41 @@
 package order.application.service;
 
 import order.adapter.in.web.OrderMapper;
+import order.adapter.out.persistence.OrderPersistencePort;
 import order.adapter.out.persistence.OrderRepository;
-import order.application.port.in.OrderPort;
-import order.domain.Cart;
+import order.application.port.in.OrderUsecase;
 import order.application.port.in.OrderValidator;
+import order.application.port.in.model.OrderRequest;
 import order.domain.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class OrderService implements OrderPort {
-    private OrderRepository orderRepository;
-    private OrderValidator orderValidator;
+public class OrderService implements OrderUsecase {
+
+    private final OrderValidator orderValidator;
     private OrderMapper orderMapper;
+    private OrderPersistencePort orderPersistencePort;
+
 //    private OrderDeliveredService orderDeliveredService;
 //    private OrderPayedService orderPayedService;
 
-    public OrderService(OrderMapper orderMapper,
-                        OrderRepository orderRepository,
-                        OrderValidator orderValidator
+    public OrderService(OrderValidator orderValidator
 //                        OrderDeliveredService orderDeliveredService,
 //                        OrderPayedService orderPayedService
     ) {
-        this.orderMapper = orderMapper;
-        this.orderRepository = orderRepository;
         this.orderValidator = orderValidator;
 //        this.orderDeliveredService = orderDeliveredService;
 //        this.orderPayedService = orderPayedService;
     }
 
+    @Override
     @Transactional
-    public void placeOrder(Cart cart) {
-        Order order = orderMapper.mapFrom(cart);
+    public Order placeOrder(OrderRequest orderRequest) {
+        Order order = orderMapper.mapOrderRequestFrom(orderRequest);
         order.place(orderValidator);
-        orderRepository.save(order);
+        Order createdOrder = orderPersistencePort.createOrder(order);
+        return createdOrder;
     }
 //
 //    @Transactional
