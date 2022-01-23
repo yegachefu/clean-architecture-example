@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlaceOrderController {
 
     private final OrderUsecase orderUsecase;
-    private OrderWebMapper orderRequestMapper;
+    private final OrderWebMapper orderRequestMapper;
 
     @PostMapping("place")
     public OrderResponse placeOrder(

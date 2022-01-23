@@ -1,12 +1,12 @@
 package order.adapter.out.persistence;
 
+import lombok.RequiredArgsConstructor;
 import order.domain.Order;
-import org.springframework.stereotype.Component;
 
-@Component
+@RequiredArgsConstructor
 public class OrderPersistenceAdapter implements OrderPersistencePort {
 
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     @Override
     public Order createOrder(Order order) {
