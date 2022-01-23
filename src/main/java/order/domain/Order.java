@@ -1,8 +1,10 @@
-package org.eternity.food.domain.order;
+package order.domain;
 
+import generic.domain.Money;
 import lombok.Builder;
 import lombok.Getter;
-import org.eternity.food.domain.generic.money.Money;
+import order.application.port.in.OrderValidator;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
