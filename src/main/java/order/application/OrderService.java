@@ -1,8 +1,7 @@
-package order.application.service;
+package order.application;
 
 import order.adapter.in.web.OrderMapper;
 import order.adapter.out.persistence.OrderPersistencePort;
-import order.adapter.out.persistence.OrderRepository;
 import order.application.port.in.OrderUsecase;
 import order.application.port.in.OrderValidator;
 import order.application.port.in.model.OrderRequest;
